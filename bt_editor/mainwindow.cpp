@@ -667,6 +667,10 @@ void MainWindow::on_actionSave_triggered()
     }
 
     QString xml_text = saveToXML();
+    // Cambiar todas las apariciones de SubTree por SubTreePlus
+    // https://github.com/BehaviorTree/BehaviorTree.CPP/issues/173
+    xml_text.replace("SubTree", "SubTreePlus");
+    xml_text.replace("__shared_blackboard", "__autoremap");
 
     QFile file(fileName);
     if (file.open(QIODevice::WriteOnly)) {
